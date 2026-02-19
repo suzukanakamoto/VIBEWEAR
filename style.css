@@ -191,13 +191,11 @@
     }
 
     .search-container {
-    flex: 0 1 40px;
-    display: flex;
-    background: #f1f1f1;
-    border-radius: 25px;
-    padding: 5px 15px;
-    transition: 0.3s;
-}
+        flex: 1; 
+        width: 100%;
+        height: 45px; /* Memberikan tinggi yang nyaman untuk jempol */
+        order: 2;    /* Search bar muncul setelah logo */
+    }
 
 
     .nav-links {
