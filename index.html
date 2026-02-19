@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeWear - Urban Clothing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+    <div class="logo">VIBE<span>WEAR</span></div>
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari produk favoritmu..." onkeyup="searchProduct()">
+        <button class="search-btn">🔍</button>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Koleksi</a>
+        <a href="#">Promo</a>
+    </nav>
+</header>
+
+    <div class="promo-slider">
+        <div class="slider-wrapper" id="slider">
+            <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80');">
+                <div class="promo-content">
+                    <h1>SEASON SALE!</h1>
+                    <p>Diskon hingga 50% untuk koleksi Summer.</p>
+                </div>
+            </div>
+            <div class="slide" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80');">
+                <div class="promo-content">
+                    <h1>NEW ARRIVALS</h1>
+                    <p>Cek koleksi Hoodie terbaru kami.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <h2 class="section-title">Semua Produk</h2>
+        <div class="product-grid">
+    <div class="product-card" onclick="openProduct('Oversized Black T-Shirt', 'Kaos katun premium 24s, anti gerah dan sangat nyaman.', 'Rp 149.000', 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500', 'https://short-url.org/1p9sV')">
+        <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500" alt="Black T-Shirt">
+            <div class="overlay">Lihat Detail</div>
+        </div>
+        <div class="product-info">
+            <span class="category">T-Shirt</span>
+            <h3>Oversized Black T-Shirt</h3>
+            <p class="price">Rp 149.000</p>
+        </div>
+    </div>
+
+    <div class="product-card" onclick="openProduct('Vintage Denim Jacket', 'Jaket denim dengan aksen washed premium.', 'Rp 450.000', 'https://down-id.img.susercontent.com/file/id-11134207-7r98r-lmmn8ildzh8ne7.webp', 'https://short-url.org/1p9tl')">
+        <div class="product-img">
+            <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98r-lmmn8ildzh8ne7.webp">
+            <div class="overlay">Lihat Detail</div>
+        </div>
+        <div class="product-info">
+            <span class="category">Outerwear</span>
+            <h3>Vintage Denim Jacket</h3>
+            <p class="price">Rp 450.000</p>
+        </div>
+    </div>
+
+    <div class="product-card" onclick="openProduct('Urban Tech Hoodie', 'Hoodie water-repellent dengan saku fungsional.', 'Rp 320.000', 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500', 'https://short-url.org/1p9tI')">
+        <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500" alt="Hoodie">
+            <div class="overlay">Lihat Detail</div>
+        </div>
+        <div class="product-info">
+            <span class="category">Hoodie</span>
+            <h3>Urban Tech Hoodie</h3>
+            <p class="price">Rp 320.000</p>
+        </div>
+    </div>
+
+    <div class="product-card" onclick="openProduct('Chino Pants Slim Fit', 'Celana chino stretch yang cocok untuk formal maupun kasual.', 'Rp 275.000', 'https://down-id.img.susercontent.com/file/id-11134201-7r98q-lr2r619fbl4lad.webp', 'https://short-url.org/1p9u1')">
+        <div class="product-img">
+            <img src="https://down-id.img.susercontent.com/file/id-11134201-7r98q-lr2r619fbl4lad.webp" alt="Chino Pants">
+            <div class="overlay">Lihat Detail</div>
+        </div>
+        <div class="product-info">
+            <span class="category">Pants</span>
+            <h3>Chino Pants Slim Fit</h3>
+            <p class="price">Rp 275.000</p>
+        </div>
+    </div>
+</div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
