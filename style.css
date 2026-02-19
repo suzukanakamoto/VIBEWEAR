@@ -179,3 +179,72 @@
     gap: 25px;
     padding-top: 20px;
 }
+
+/* --- RESPONSIVE MOBILE OPTIMIZATION --- */
+
+@media (max-width: 768px) {
+    /* Header: Susun vertikal agar search bar punya ruang */
+    .main-header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .search-container {
+    flex: 0 1 40px;
+    display: flex;
+    background: #f1f1f1;
+    border-radius: 25px;
+    padding: 5px 15px;
+    transition: 0.3s;
+}
+
+
+    .nav-links {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .nav-links a {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    /* Slider: Kurangi tinggi agar tidak memenuhi layar HP */
+    .promo-slider {
+        height: 250px;
+    }
+
+    .promo-content h1 {
+        font-size: 1.8rem;
+    }
+
+    /* Grid Produk: Tampilkan 2 kolom (standar e-commerce mobile) */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .product-img {
+        height: 200px; /* Sesuaikan tinggi gambar di HP */
+    }
+
+    .product-info h3 {
+        font-size: 14px; /* Kecilkan teks agar tidak pecah */
+    }
+}
+
+/* Optimasi untuk HP yang sangat kecil (layar di bawah 480px) */
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tetap 2 kolom agar efisien */
+        gap: 10px;
+    }
+    
+    .promo-content h1 {
+        font-size: 1.4rem;
+    }
+}
