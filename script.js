@@ -1,47 +1,45 @@
 /**
- * VIBEWEAR - Script Logic
- * Fitur: Auto Slider, Pencarian Produk, & Dynamic Detail Page
+ * VIBEWEAR - Script Logic (Optimized Search)
  */
 
 // --- 1. LOGIKA AUTO SLIDER PROMO ---
 const slider = document.getElementById('slider');
 let slideIndex = 0;
-const totalSlides = 2; // Sesuaikan dengan jumlah slide di HTML
+const totalSlides = 2; 
 
 function autoSlide() {
+    if (!slider) return;
     slideIndex++;
     if (slideIndex >= totalSlides) {
         slideIndex = 0;
     }
-    // Menggeser slider berdasarkan persentase (100% per slide)
-    if (slider) {
-        slider.style.transform = `translateX(-${slideIndex * (100 / totalSlides)}%)`;
-    }
+    slider.style.transform = `translateX(-${slideIndex * (100 / totalSlides)}%)`;
 }
-
-// Menjalankan slider setiap 4 detik
 setInterval(autoSlide, 4000);
 
 
-// --- 2. FUNGSI PENCARIAN PRODUK ---
+// --- 2. FUNGSI PENCARIAN PRODUK (FIXED) ---
 function searchProduct() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
+    // Ambil input, ubah ke lowercase, hapus spasi di awal/akhir
+    const input = document.getElementById('searchInput').value.toLowerCase().trim();
     const productCards = document.querySelectorAll('.product-card');
     
     productCards.forEach(card => {
+        // Ambil Nama Produk dan Kategori
         const productName = card.querySelector('h3').innerText.toLowerCase();
         const category = card.querySelector('.category').innerText.toLowerCase();
         
-        // Cek apakah input cocok dengan Nama Produk ATAU Kategori
+        // Logika: Tampilkan jika Nama atau Kategori mengandung kata kunci
         if (productName.includes(input) || category.includes(input)) {
-            card.style.display = "block";
-            card.style.animation = "fadeIn 0.4s ease forwards";
+            card.style.display = ""; // Mengembalikan ke display awal (grid)
+            card.style.opacity = "1";
+            card.style.transform = "scale(1)";
         } else {
+            // Sembunyikan dengan transisi halus
             card.style.display = "none";
         }
     });
 }
-
 
 // --- 3. FUNGSI OPEN PRODUCT (PREMIUM DETAIL PAGE) ---
 function openProduct(name, desc, price, img, checkoutLink) {
