@@ -1,250 +1,222 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+/**
+ * VIBEWEAR - Script Logic
+ * Fitur: Auto Slider, Pencarian Produk, & Dynamic Detail Page
+ */
 
-/* Promo Slider */
-.promo-slider {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    position: relative;
-}
+// --- 1. LOGIKA AUTO SLIDER PROMO ---
+const slider = document.getElementById('slider');
+let slideIndex = 0;
+const totalSlides = 2; // Sesuaikan dengan jumlah slide di HTML
 
-.slider-wrapper {
-    display: flex;
-    width: 200%; /* Sesuai jumlah slide */
-    height: 100%;
-    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-.slide {
-    width: 50%;
-    height: 100%;
-    background-size: cover !important;
-    background-position: center !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-}
-
-/* Header Tab*/
-/* Header Styling */
-.main-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.logo { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
-.logo span { color: #e67e22; }
-
-/* Search Bar Styling */
-.search-container {
-    flex: 0 1 400px;
-    display: flex;
-    background: #f1f1f1;
-    border-radius: 25px;
-    padding: 5px 15px;
-    transition: 0.3s;
-}
-
-.search-container:focus-within {
-    background: #fff;
-    box-shadow: 0 0 0 2px #e67e22;
-}
-
-#searchInput {
-    width: 100%;
-    border: none;
-    background: transparent;
-    padding: 8px;
-    outline: none;
-    font-size: 14px;
-}
-
-.search-btn {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    margin-left: 20px;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.nav-links a:hover { color: #e67e22; }
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .main-header { flex-direction: column; gap: 15px; }
-    .nav-links { display: none; } /* Sembunyikan nav di mobile untuk ringkas */
-}
-
-/* Product Grid */
-.container { padding: 40px 5%; }
-.section-title { margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.product-card {
-    background: #fff;
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.product-card:hover {
-    transform: translateY(-10px);
-}
-
-.product-img {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
-}
-
-.product-img img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.product-card:hover .product-img img {
-    transform: scale(1.1);
-}
-
-.overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.3);
-    color: white; display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: 0.3s; font-weight: bold;
-}
-
-.product-card:hover .overlay { opacity: 1; }
-
-.product-info { padding: 15px; }
-.price { color: #e67e22; font-weight: bold; margin-top: 5px; }
-
-/* Styling Kategori di atas Nama Produk */
-.category {
-    font-size: 12px;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* Animasi Entry untuk Grid Produk */
-.product-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
-}
-
-/* Staggered Delay (Produk muncul bergantian) */
-.product-card:nth-child(1) { animation-delay: 0.1s; }
-.product-card:nth-child(2) { animation-delay: 0.2s; }
-.product-card:nth-child(3) { animation-delay: 0.3s; }
-.product-card:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+function autoSlide() {
+    slideIndex++;
+    if (slideIndex >= totalSlides) {
+        slideIndex = 0;
+    }
+    // Menggeser slider berdasarkan persentase (100% per slide)
+    if (slider) {
+        slider.style.transform = `translateX(-${slideIndex * (100 / totalSlides)}%)`;
     }
 }
 
-/* Membuat grid lebih fleksibel */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    padding-top: 20px;
-}
-
-/* --- RESPONSIVE MOBILE OPTIMIZATION --- */
-
-@media (max-width: 768px) {
-    /* Header: Susun vertikal agar search bar punya ruang */
-    .main-header {
-        flex-direction: column;
-        padding: 15px;
-        gap: 15px;
-    }
-
-    .search-container {
-    flex: 0 1 40px;
-    display: flex;
-    background: #f1f1f1;
-    border-radius: 25px;
-    padding: 5px 15px;
-    transition: 0.3s;
-}
+// Menjalankan slider setiap 4 detik
+setInterval(autoSlide, 4000);
 
 
-    .nav-links {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        gap: 15px;
-    }
-
-    .nav-links a {
-        margin: 0;
-        font-size: 14px;
-    }
-
-    /* Slider: Kurangi tinggi agar tidak memenuhi layar HP */
-    .promo-slider {
-        height: 250px;
-    }
-
-    .promo-content h1 {
-        font-size: 1.8rem;
-    }
-
-    /* Grid Produk: Tampilkan 2 kolom (standar e-commerce mobile) */
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 15px;
-        padding: 10px;
-    }
-
-    .product-img {
-        height: 200px; /* Sesuaikan tinggi gambar di HP */
-    }
-
-    .product-info h3 {
-        font-size: 14px; /* Kecilkan teks agar tidak pecah */
-    }
-}
-
-/* Optimasi untuk HP yang sangat kecil (layar di bawah 480px) */
-@media (max-width: 480px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* Tetap 2 kolom agar efisien */
-        gap: 10px;
-    }
+// --- 2. FUNGSI PENCARIAN PRODUK ---
+function searchProduct() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const productCards = document.querySelectorAll('.product-card');
     
-    .promo-content h1 {
-        font-size: 1.4rem;
-    }
+    productCards.forEach(card => {
+        const productName = card.querySelector('h3').innerText.toLowerCase();
+        const category = card.querySelector('.category').innerText.toLowerCase();
+        
+        // Cek apakah input cocok dengan Nama Produk ATAU Kategori
+        if (productName.includes(input) || category.includes(input)) {
+            card.style.display = "block";
+            card.style.animation = "fadeIn 0.4s ease forwards";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+
+// --- 3. FUNGSI OPEN PRODUCT (PREMIUM DETAIL PAGE) ---
+function openProduct(name, desc, price, img, checkoutLink) {
+    const detailWindow = window.open("", "_blank");
+    
+    // Menulis konten HTML ke tab baru
+    detailWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="id">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${name} | VIBEWEAR Collective</title>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+                
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { 
+                    font-family: 'Inter', sans-serif; 
+                    background: #ffffff; 
+                    color: #1a1a1a;
+                    line-height: 1.6;
+                }
+
+                .main-container {
+                    display: flex;
+                    min-height: 100vh;
+                }
+
+                /* Sisi Visual (Kiri) */
+                .visual-side {
+                    flex: 1;
+                    background: #f4f4f4;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 40px;
+                    position: sticky;
+                    top: 0;
+                    height: 100vh;
+                }
+
+                .visual-side img {
+                    max-width: 90%;
+                    max-height: 85vh;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+                    animation: zoomIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+
+                /* Sisi Konten (Kanan) */
+                .content-side {
+                    flex: 1;
+                    padding: 80px 8%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .breadcrumb { 
+                    font-size: 12px; 
+                    letter-spacing: 2px; 
+                    color: #888; 
+                    margin-bottom: 20px; 
+                    text-transform: uppercase; 
+                }
+                
+                h1 { 
+                    font-size: clamp(2.5rem, 5vw, 3.5rem); 
+                    font-weight: 900; 
+                    line-height: 1.1; 
+                    margin-bottom: 15px; 
+                    letter-spacing: -1px;
+                }
+
+                .price-tag { 
+                    font-size: 24px; 
+                    color: #e67e22; 
+                    margin-bottom: 35px;
+                    font-weight: 500;
+                }
+
+                .description { 
+                    font-size: 17px; 
+                    color: #444; 
+                    margin-bottom: 40px;
+                    max-width: 550px;
+                }
+
+                /* Area Tombol */
+                .action-area {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                }
+
+                .btn-primary {
+                    background: #1a1a1a;
+                    color: white;
+                    padding: 20px;
+                    text-decoration: none;
+                    text-align: center;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    transition: 0.3s;
+                    border: 1px solid #1a1a1a;
+                }
+
+                .btn-primary:hover {
+                    background: transparent;
+                    color: #1a1a1a;
+                }
+
+                .btn-secondary {
+                    background: transparent;
+                    color: #666;
+                    padding: 15px;
+                    text-decoration: none;
+                    text-align: center;
+                    font-size: 14px;
+                    border: 1px solid #eee;
+                    transition: 0.3s;
+                }
+
+                .btn-secondary:hover { border-color: #1a1a1a; color: #1a1a1a; }
+
+                /* ANIMASI */
+                @keyframes zoomIn {
+                    from { opacity: 0; transform: scale(1.05); }
+                    to { opacity: 1; transform: scale(1); }
+                }
+
+                /* RESPONSIVE MOBILE */
+                @media (max-width: 900px) {
+                    .main-container { flex-direction: column; }
+                    .visual-side { 
+                        height: 60vh; 
+                        position: relative; 
+                        min-width: 100%;
+                    }
+                    .content-side { 
+                        min-width: 100%; 
+                        padding: 40px 20px;
+                        text-align: center;
+                    }
+                    .description { margin: 0 auto 30px auto; }
+                    .btn-primary { width: 100%; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="main-container">
+                <div class="visual-side">
+                    <img src="${img}" alt="${name}">
+                </div>
+                
+                <div class="content-side">
+                    <div class="breadcrumb">Koleksi Terbatas / Clothing</div>
+                    <h1>${name}</h1>
+                    <div class="price-tag">${price}</div>
+                    
+                    <p class="description">
+                        ${desc} <br><br>
+                        Dibuat dengan standar kualitas tinggi, memastikan kenyamanan penggunaan sepanjang hari dengan desain yang tetap stylish dan modern.
+                    </p>
+
+                    <div class="action-area">
+                        <a href="${checkoutLink}" target="_blank" class="btn-primary">Beli Sekarang</a>
+                        <a href="javascript:window.close()" class="btn-secondary">Kembali Menjelajah</a>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+    `);
 }
